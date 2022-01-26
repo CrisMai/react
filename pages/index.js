@@ -1,6 +1,8 @@
 
 import appConfig from '../config.json';
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
+import React from 'react';
+
 
 
 
@@ -78,7 +80,10 @@ function Titulo(props) {
 //export default HomePage
 
 export default function PaginaInicial() {
-    const username = 'CrisMai';
+    //const username = 'peas';
+    const [username, setUsername] = React.useState('peas');
+
+
 
     return (
         <>
@@ -109,6 +114,11 @@ export default function PaginaInicial() {
                     {/* Formulário */}
                     <Box
                         as="form"
+                        onSubmit={ function (infosDoEvento) {
+                            infosDoEvento.preventDefault()
+                            console.log('Alguém submeteu o form');
+
+                        }}
                         styleSheet={{
                             display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                             width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
@@ -119,7 +129,27 @@ export default function PaginaInicial() {
                             {appConfig.name}
                         </Text>
 
+                        {/* <input
+                            type="text" 
+                            value={username}
+                            onChange={function (event) {
+                                console.log('usuario digitou', event.target.value);
+                                // Onde está o valor?
+                                const valor = event.target.value;
+                                // Trocar o valor da variável através do React
+                                setUsername(valor);
+                            }}
+                            /> */}
+
                         <TextField
+                            value={username}
+                            onChange={function (event) {
+                                console.log('usuario digitou', event.target.value);
+                                // Onde está o valor?
+                                const valor = event.target.value;
+                                // Trocar o valor da variável através do React
+                                setUsername(valor);
+                            }}
                             fullWidth
                             textFieldColors={{
                                 neutral: {
@@ -130,6 +160,7 @@ export default function PaginaInicial() {
                                 },
                             }}
                         />
+
                         <Button
                             type='submit'
                             label='Entrar'
